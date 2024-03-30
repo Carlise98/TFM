@@ -62,61 +62,198 @@ def calculate_ssim(img1, img2):
 
 if __name__ == "__main__":
 
-    path_images = "C:/Users/Carles/Documents/GitHub/LYT-Net/results/LOLv1"
+    path_images = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/target"
     numero_archivos = len(os.listdir(path_images))
 
-    # fig, ax = plt.subplots(layout='constrained')
-    # width = 0.25  # the width of the bars
-    # multiplier = 0
+    ssim_lyt = []
+    psnr_lyt = []
+    ssim_gsad = []
+    psnr_gsad = []
+    ssim_copula = []
+    psnr_copula = []
+    ssim_geometric = []
+    psnr_geometric = []
+    ssim_harmonic = []
+    psnr_harmonic = []
+    ssim_mean = []
+    psnr_mean = []
+    ssim_min = []
+    psnr_min = []
+    ssim_product = []
+    psnr_product = []
+
 
     for i in range(1,numero_archivos+1):
 
         
         # Rutas de las imágenes de entrada y salida
-        LYT_path = "C:/Users/Carles/Documents/GitHub/LYT-Net/test/" + str(i) + ".png"  # Ruta de la primera imagen
-        GSAD_path = "C:/Users/Carles/Documents/GitHub/GSAD/test/" + str(i) + "_normal.png"  # Ruta de la segunda imagen
-        mean_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv1/mean/imagen_resultante_" + str(i) + ".png"  # Ruta de la imagen resultante
-        target_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv1/target/" + str(i) + ".png"  # Ruta de la imagen resultante
+        LYT_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/LYT/" + str(i) + ".png"  # Ruta de la primera imagen
+        GSAD_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/GSAD/" + str(i) + ".png"  # Ruta de la segunda imagen
+
+        copula_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/copula/imagen_copula_" + str(i) + ".png"  # Ruta de la imagen resultante
+        geometric_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/geometric_mean/imagen_geometric_" + str(i) + ".png"  # Ruta de la imagen resultante
+        harmonic_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/harmonic_mean/imagen_harmonic_" + str(i) + ".png"  # Ruta de la imagen resultante
+        mean_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/mean/imagen_mean_" + str(i) + ".png"  # Ruta de la imagen resultante
+        min_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/minimum/imagen_min_" + str(i) + ".png"  # Ruta de la imagen resultante
+        product_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/agregaciones/product/imagen_product_" + str(i) + ".png"  # Ruta de la imagen resultante
+
+        target_path = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/target/" + str(i) + ".png"  # Ruta de la imagen resultante
 
         # Carga de imágenes
         LYT_image=cv2.imread(LYT_path, 1)
         GSAD_image=cv2.imread(GSAD_path, 1)
+
+        copula_image=cv2.imread(copula_path, 1)
+        geometric_image=cv2.imread(geometric_path, 1)
+        harmonic_image=cv2.imread(harmonic_path, 1)
         mean_image=cv2.imread(mean_path, 1)
+        min_image=cv2.imread(min_path, 1)
+        product_image=cv2.imread(product_path, 1)
+
         target_image=cv2.imread(target_path, 1)
 
         # Cálculo de las métricas
-        print('Imagen ' + str(i))
-        print('SSIM-LYT')
-        print(calculate_ssim(LYT_image, target_image))
-        print('PSNR-LYT')
-        print(calculate_psnr(LYT_image,target_image))
+        # print('Imagen ' + str(i))
+        # print('SSIM-LYT')
+        # print(calculate_ssim(LYT_image, target_image))
+        # print('PSNR-LYT')
+        # print(calculate_psnr(LYT_image,target_image))
         
-        print('SSIM-GSAD')
-        print(calculate_ssim(GSAD_image, target_image))
-        print('PSNR-GSAD')
-        print(calculate_psnr(GSAD_image,target_image))
+        # print('SSIM-GSAD')
+        # print(calculate_ssim(GSAD_image, target_image))
+        # print('PSNR-GSAD')
+        # print(calculate_psnr(GSAD_image,target_image))
 
-        print('SSIM-MEAN')
-        print(calculate_ssim(mean_image, target_image))
-        print('PSNR-MEAN')
-        print(calculate_psnr(mean_image,target_image))
-        print("-" * 20)
+        # print('SSIM-MEAN')
+        # print(calculate_ssim(mean_image, target_image))
+        # print('PSNR-MEAN')
+        # print(calculate_psnr(mean_image,target_image))
+        # print("-" * 20)
+# --------------------------------------------------------------------------------------
+        ssim_lyt.append(calculate_ssim(LYT_image, target_image))
+        psnr_lyt.append(calculate_psnr(LYT_image, target_image))
+        ssim_gsad.append(calculate_ssim(GSAD_image, target_image))
+        psnr_gsad.append(calculate_psnr(GSAD_image, target_image))
 
-    #     offset = width * multiplier
-    #     rects = ax.bar(45 + offset,
-    #                     (calculate_ssim(LYT_image, target_image),
-    #                     # calculate_psnr(LYT_image,target_image),
-    #                     calculate_ssim(GSAD_image, target_image),
-    #                     # calculate_psnr(GSAD_image,target_image),
-    #                     calculate_ssim(mean_image, target_image))
-    #                     # calculate_psnr(mean_image,target_image)]
-    #                     , width, label='imagen' + str(i))
-    #     ax.bar_label(rects, padding=3)
-    #     multiplier += 1
+        ssim_copula.append(calculate_ssim(copula_image, target_image))
+        psnr_copula.append(calculate_psnr(copula_image, target_image))
+        ssim_geometric.append(calculate_ssim(geometric_image, target_image))
+        psnr_geometric.append(calculate_psnr(geometric_image, target_image))
+        ssim_harmonic.append(calculate_ssim(harmonic_image, target_image))
+        psnr_harmonic.append(calculate_psnr(harmonic_image, target_image))
+        ssim_mean.append(calculate_ssim(mean_image, target_image))
+        psnr_mean.append(calculate_psnr(mean_image, target_image))
+        ssim_min.append(calculate_ssim(min_image, target_image))
+        psnr_min.append(calculate_psnr(min_image, target_image))
+        ssim_product.append(calculate_ssim(product_image, target_image))
+        psnr_product.append(calculate_psnr(product_image, target_image))
     
-    # ax.set_ylabel('Length (mm)')
-    # ax.set_title('Penguin attributes by species')
-    # # ax.set_xticks(15 + width, species)
-    # ax.legend(loc='upper left', ncols=3)
-    # ax.set_ylim(0, 1)
+    
+    
+    # Graficar los resultados
+    # plt.figure(figsize=(10, 6))
+
+    # plt.subplot(2, 1, 1)
+    # plt.plot(range(1, numero_archivos+1), ssim_lyt, label='SSIM LYT')
+    # plt.plot(range(1, numero_archivos+1), ssim_gsad, label='SSIM GSAD')
+    # plt.plot(range(1, numero_archivos+1), ssim_mean, label='SSIM MEAN')
+    # plt.xlabel('Imagen')
+    # plt.ylabel('Valor')
+    # plt.title('SSIM')
+    # plt.legend()
+
+    # plt.subplot(2, 1, 2)
+    # plt.plot(range(1, numero_archivos+1), psnr_lyt, label='PSNR LYT')
+    # plt.plot(range(1, numero_archivos+1), psnr_gsad, label='PSNR GSAD')
+    # plt.plot(range(1, numero_archivos+1), psnr_mean, label='PSNR MEAN')
+    # plt.xlabel('Imagen')
+    # plt.ylabel('Valor')
+    # plt.title('PSNR')
+    # plt.legend()
+
+    # plt.tight_layout()
     # plt.show()
+    # Calcular la media de los valores de cada métrica
+    media_ssim_lyt = np.mean(ssim_lyt)
+    media_psnr_lyt = np.mean(psnr_lyt)
+    media_ssim_gsad = np.mean(ssim_gsad)
+    media_psnr_gsad = np.mean(psnr_gsad)
+
+    media_ssim_copula = np.mean(ssim_copula)
+    media_psnr_copula = np.mean(psnr_copula)
+    media_ssim_geometric = np.mean(ssim_geometric)
+    media_psnr_geometric = np.mean(psnr_geometric)
+    media_ssim_harmonic = np.mean(ssim_harmonic)
+    media_psnr_harmonic = np.mean(psnr_harmonic)
+    media_ssim_mean = np.mean(ssim_mean)
+    media_psnr_mean = np.mean(psnr_mean)
+    media_ssim_min = np.mean(ssim_min)
+    media_psnr_min = np.mean(psnr_min)
+    media_ssim_product = np.mean(ssim_product)
+    media_psnr_product = np.mean(psnr_product)
+
+
+    # Imprimir la media de los valores de cada métrica
+    print('Media SSIM LYT:', media_ssim_lyt)
+    print('Media PSNR LYT:', media_psnr_lyt)
+    print('Media SSIM GSAD:', media_ssim_gsad)
+    print('Media PSNR GSAD:', media_psnr_gsad)
+
+    print('Media SSIM COPULA:', media_ssim_copula)
+    print('Media PSNR COPULA:', media_psnr_copula)
+    print('Media SSIM GEOMETRIC:', media_ssim_geometric)
+    print('Media PSNR GEOMETRIC:', media_psnr_geometric)
+    print('Media SSIM HARMONIC:', media_ssim_harmonic)
+    print('Media PSNR HARMONIC:', media_psnr_harmonic)
+    print('Media SSIM MEAN:', media_ssim_mean)
+    print('Media PSNR MEAN:', media_psnr_mean)
+    print('Media SSIM MIN:', media_ssim_min)
+    print('Media PSNR MIN:', media_psnr_min)
+    print('Media SSIM PRODUCT:', media_ssim_product)
+    print('Media PSNR PRODUCT:', media_psnr_product)
+
+
+    # Graficar las medias de las métricas
+    metricas_ssim = ['SSIM LYT', 'SSIM GSAD','SSIM COPULA', 'SSIM GEOMETRIC', 'SSIM HARMONIC', 'SSIM MEAN', 'SSIM MIN', 'SSIM PRODUCT' ]
+    metricas_psnr = ['PSNR LYT', 'PSNR GSAD','PSNR COPULA', 'PSNR GEOMETRIC', 'PSNR HARMONIC', 'PSNR MEAN', 'PSNR MIN', 'PSNR PRODUCT']
+
+    medias_ssim = [media_ssim_lyt, media_ssim_gsad, media_ssim_copula, media_ssim_geometric, media_ssim_harmonic, media_ssim_mean, media_ssim_min, media_ssim_product]
+    medias_psnr = [media_psnr_lyt, media_psnr_gsad, media_psnr_copula, media_psnr_geometric, media_psnr_harmonic, media_psnr_mean, media_psnr_min, media_psnr_product]
+    
+    # plt.bar(metricas, medias)
+    # plt.xlabel('Métricas')
+    # plt.ylabel('Media')
+    # plt.title('Medias de Métricas')
+    # plt.xticks(rotation=45, ha='right')
+    # plt.tight_layout()
+    # plt.show()
+
+
+    # Graficar las medias de las métricas SSIM en una gráfica
+    plt.figure(figsize=(10, 6))
+    
+
+    plt.subplot(2, 1, 1)
+    bars = plt.bar(metricas_ssim, medias_ssim, color=['blue', 'green', 'purple'])
+    plt.xlabel('Métricas SSIM')
+    plt.ylabel('Media')
+    plt.title('Medias de Métricas SSIM')
+    plt.xticks(rotation=45, ha='right')
+    plt.grid(True)
+    
+    for bar, media in zip(bars, medias_ssim):
+        plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f'{media:.2f}', ha='center', va='bottom')
+
+    plt.subplot(2, 1, 2)
+    plt.bar(metricas_psnr, medias_psnr, color=['orange', 'red', 'brown'])
+    plt.xlabel('Métricas PSNR')
+    plt.ylabel('Media')
+    plt.title('Medias de Métricas PSNR')
+    plt.xticks(rotation=45, ha='right')
+    plt.grid(True)
+
+    for bar, media in zip(bars, medias_psnr):
+        plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f'{media:.2f}', ha='center', va='bottom')
+   
+    plt.tight_layout()
+    plt.show()
