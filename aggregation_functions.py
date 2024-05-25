@@ -75,7 +75,7 @@ def harmonic_mean_images(image1_path, image2_path):
     # Escalar nuevamente a valores entre 0 y 255
     nueva_imagen = (nueva_imagen * 255).astype(np.uint8)
 
-    return nueva_imagen
+    return nueva_imagenos.chdir('images/LOLv2/Synthetic') 
 
 '''
     Media geometrica
@@ -114,7 +114,7 @@ def algebraic_product_images(image1_path,image2_path):
     
    
 if __name__ == "__main__":
-    os.chdir('images/LOLv2/Synthetic') 
+    
     path_images = "C:/Users/Carles/Documents/GitHub/TFM/images/LOLv2/Synthetic/target"
     numero_archivos = len(os.listdir(path_images))
     # Directorio base

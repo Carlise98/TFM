@@ -1,7 +1,10 @@
 import os
 
 # Directorio donde se encuentran los archivos
-directorio = r"C:\Users\Carles\Documents\GitHub\TFM\images\LOLv2\Synthetic\GSAD/"
+base_path = os.getcwd()
+
+# f"{base_path}/images\LOLv2\Synthetic\GSAD/"
+directorio = f"{base_path}/images\LOLv2\Synthetic\GSAD/"
 
 # Obtener la lista de nombres de archivo en el directorio
 nombres_archivos = os.listdir(directorio)
